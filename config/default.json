@@ -1,0 +1,4 @@
+{
+  "port": 5000,
+  "mongoUrl": "mongodb://localhost:27017/bike_rental_db"
+}
