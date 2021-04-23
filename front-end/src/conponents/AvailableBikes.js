@@ -32,12 +32,12 @@ export const AvailableBikes = ({ availableList, getAvailableBikesList, getRented
 
     return (
         <>
-            <h2>Available bicycles</h2>
+            <h4>Available bicycles</h4>
             {availableList.map(bike => {
-                return <div className="m-2">
-                    {bike.name} / {bike.type} / {bike.rentPrice}
-                    <button data-id={bike._id} className="badge-info ml-4" onClick={rentBike}>Rent</button>
-                    <button data-id={bike._id} className="btn-danger ml-2" onClick={deleteBike}>Delete</button>
+                return <div className="border border-secondary rounded bg-light p-4 m-3 d-flex">
+                    <span className="mr-auto p-2">{bike.name} / {bike.type} / ${bike.rentPrice}</span>
+                    <button data-id={bike._id} className="btn btn-info p-2 mr-2" onClick={rentBike}>Rent</button>
+                    <button data-id={bike._id} className="btn btn-danger p-2" onClick={deleteBike}>Delete</button>
                 </div>
             })}
         </>

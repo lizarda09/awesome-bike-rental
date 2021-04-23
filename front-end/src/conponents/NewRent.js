@@ -27,24 +27,27 @@ export const NewRent = ({ getAvailableBikesList }) => {
 
 
     return (
-        <div>
-            <label>
-                Bike name
-                <input type="text" name="name" onChange={changeHandler}/>
-            </label>
-            <label>
-                Bike type
-                <select name="type" onChange={changeHandler}>
-                    {typeOfBike.map(bikeType => {
-                        return <option>{ bikeType }</option>;
-                    })}
-                </select>
-            </label>
-            <label>
-                Rent price
-                <input type="text" name="rentPrice" onChange={changeHandler}/>
-            </label>
-            <button onClick={addBikeHandler}>Submit rent</button>
-        </div>
+        <>
+            <h4>Create new rent</h4>
+            <div class="border border-secondary rounded bg-light p-3 m-3">
+                <label>
+                    Bike name
+                    <input className="m-3" type="text" name="name" onChange={changeHandler}/>
+                </label>
+                <label>
+                    Bike type
+                    <select className="m-3" name="type" onChange={changeHandler}>
+                        {typeOfBike.map(bikeType => {
+                            return <option>{ bikeType }</option>;
+                        })}
+                    </select>
+                </label>
+                <label>
+                    Rent price
+                    <input className="m-3" type="text" name="rentPrice" onChange={changeHandler}/>
+                </label>
+                <button className="btn btn-success" onClick={addBikeHandler}>Submit rent</button>
+            </div>
+        </>
     );
 };
