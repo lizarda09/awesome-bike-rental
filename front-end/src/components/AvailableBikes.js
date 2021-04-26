@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useHttp} from "../myHooks/http.hook";
 
-export const AvailableBikes = ({ availableList, getAvailableBikesList, getRentedBikesList }) => {
+export const AvailableBikes = ({ availableBikesList, getAvailableBikesList, getRentedBikesList }) => {
 
     const { request } = useHttp();
     const deleteBike = async event => {
@@ -31,8 +31,8 @@ export const AvailableBikes = ({ availableList, getAvailableBikesList, getRented
 
     return (
         <>
-            <h4>Available bicycles</h4>
-            {availableList.map(bike => {
+            <h4>Available bicycles ({availableBikesList.length})</h4>
+            {availableBikesList.map(bike => {
                 return <div className="border border-secondary rounded bg-light p-4 m-3 d-flex">
                     <span className="mr-auto p-2">{bike.name} / {bike.type} / ${bike.rentPrice}</span>
                     <button data-id={bike._id} className="btn btn-info p-2 mr-2" onClick={rentBike}>Rent</button>

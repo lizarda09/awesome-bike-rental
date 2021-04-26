@@ -2,6 +2,8 @@ import React, {useCallback, useState} from 'react';
 import {useHttp} from "../myHooks/http.hook";
 
 export const NewRent = ({ getAvailableBikesList }) => {
+    const inputName = document.getElementById("inputName");
+    const inputPrice = document.getElementById("inputPrice");
 
     const [typeOfBike, setTypeOfBike] = useState(
         ["Road", "Mountain", "Touring", "Folding", "Fixed Gear/Track", "BMX", "Recumbent", "Cruiser"]
@@ -19,9 +21,10 @@ export const NewRent = ({ getAvailableBikesList }) => {
 
     const addBikeHandler = async () => {
         try {
-            const bike = await request('/api/bike/available/add', 'POST', {...form});
+            await request('/api/bike/available/add', 'POST', {...form});
             getAvailableBikesList();
-            console.log(bike);
+            inputName.value = "";
+            inputPrice.value = "";
         } catch (e) {}
     };
 
@@ -32,7 +35,7 @@ export const NewRent = ({ getAvailableBikesList }) => {
             <div class="border border-secondary rounded bg-light p-3 m-3">
                 <label>
                     Bike name
-                    <input className="m-3" type="text" name="name" onChange={changeHandler}/>
+                    <input id="inputName" className="m-3" type="text" name="name" onChange={changeHandler}/>
                 </label>
                 <label>
                     Bike type
@@ -44,7 +47,7 @@ export const NewRent = ({ getAvailableBikesList }) => {
                 </label>
                 <label>
                     Rent price
-                    <input className="m-3" type="text" name="rentPrice" onChange={changeHandler}/>
+                    <input id="inputPrice" className="m-3" type="text" name="rentPrice" onChange={changeHandler}/>
                 </label>
                 <button className="btn btn-success" onClick={addBikeHandler}>Submit rent</button>
             </div>

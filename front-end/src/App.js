@@ -1,9 +1,9 @@
 import './App.css';
-import {NewRent} from "./conponents/NewRent";
-import {AvailableBikes} from "./conponents/AvailableBikes";
+import {NewRent} from "./components/NewRent";
+import {AvailableBikes} from "./components/AvailableBikes";
 import {useHttp} from "./myHooks/http.hook";
 import {useCallback, useEffect, useState} from "react";
-import {RentedBikes} from "./conponents/RentedBikes";
+import {RentedBikes} from "./components/RentedBikes";
 
 function App() {
     const { request } = useHttp();
@@ -23,11 +23,17 @@ function App() {
     }, [getAvailableBikesList]);
 
     const [rentedBikesList, setRentedBikesList] = useState([]);
+    const [yourTotalRent, setYourTotalRent] = useState(0);
     const getRentedBikesList = useCallback(async () => {
         try {
             const data = await request('/api/bike/rented', 'GET', null);
             console.log(data);
             setRentedBikesList(data.bikes);
+            let totalRent = 0;
+            data.bikes.forEach(item => {
+                totalRent += item.rentPrice;
+            });
+            setYourTotalRent(totalRent);
         } catch (e){
             console.log(e);
         }
@@ -42,11 +48,12 @@ function App() {
         <h1>Awesome bike rental</h1>
         <NewRent getAvailableBikesList={getAvailableBikesList} />
         <RentedBikes
+            yourTotalRent={yourTotalRent}
             rentedBikesList={rentedBikesList}
             getAvailableBikesList={getAvailableBikesList}
             getRentedBikesList={getRentedBikesList}/>
         <AvailableBikes
-            availableList={availableBikesList}
+            availableBikesList={availableBikesList}
             getAvailableBikesList={getAvailableBikesList}
             getRentedBikesList={getRentedBikesList}
         />

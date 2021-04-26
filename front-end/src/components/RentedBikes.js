@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useHttp} from "../myHooks/http.hook";
 
-export const RentedBikes = ({ rentedBikesList, getAvailableBikesList, getRentedBikesList }) => {
+export const RentedBikes = ({ rentedBikesList, getAvailableBikesList, getRentedBikesList, yourTotalRent }) => {
 
     const { request } = useHttp();
 
@@ -29,7 +29,7 @@ export const RentedBikes = ({ rentedBikesList, getAvailableBikesList, getRentedB
 
     return (
         <>
-            <h4>You rent</h4>
+            <h4>You rent (Total: ${yourTotalRent})</h4>
             {rentedBikesList.map(bike => {
                 return <div className="border border-secondary rounded bg-light p-4 m-3 d-flex">
                     <span className="mr-auto p-2">{bike.name} / {bike.type} / ${bike.rentPrice}</span>
