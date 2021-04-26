@@ -24,7 +24,6 @@ export const AvailableBikes = ({ availableList, getAvailableBikesList, getRented
             const rentedBike = await request('api/bike/rented/add', 'POST', { name, type, rentPrice });
             getAvailableBikesList();
             getRentedBikesList();
-            console.log(rentedBike);
         } catch (e){
             console.log(e);
         }
