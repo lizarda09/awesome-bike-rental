@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React from 'react';
 import {useHttp} from "../myHooks/http.hook";
 
 export const AvailableBikes = ({ availableBikesList, getAvailableBikesList, getRentedBikesList }) => {
@@ -19,7 +19,7 @@ export const AvailableBikes = ({ availableBikesList, getAvailableBikesList, getR
         try {
             const idAvailableBike = event.target.dataset.id;
             const bikeInfo = await request(`api/bike/available/${idAvailableBike}`);
-            const { id, name, type, rentPrice, rentTime } = bikeInfo.bike;
+            const { name, type, rentPrice, rentTime } = bikeInfo.bike;
             await request(`/api/bike/available/${idAvailableBike}`, 'DELETE', null);
             await request('api/bike/rented/add', 'POST', { name, type, rentPrice, rentTime });
             getAvailableBikesList();

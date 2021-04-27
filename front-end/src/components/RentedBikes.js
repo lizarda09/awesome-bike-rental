@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React from 'react';
 import {useHttp} from "../myHooks/http.hook";
 
 export const RentedBikes = ({ rentedBikesList, getAvailableBikesList, getRentedBikesList, yourTotalRent }) => {
