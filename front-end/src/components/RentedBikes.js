@@ -9,17 +9,20 @@ export const RentedBikes = ({ rentedBikesList, getAvailableBikesList, getRentedB
         try {
             const idRentedBike = event.target.dataset.id;
             const bikeInfo = await request(`api/bike/rented/${idRentedBike}`);
-            const { name, type, rentPrice, dateOfRent } = bikeInfo.bike;
+            const { rentTime, name, type, rentPrice, dateOfRent } = bikeInfo.bike;
             await request(`/api/bike/rented/${idRentedBike}`, 'DELETE', null);
             const today = new Date();
             const rentDay = new Date(dateOfRent);
+            const rentTimeArr = rentTime.split(' ');
             const diff = (today - rentDay)/ (1000*60*60);
+            const timeOfRent = `${+rentTimeArr[0] + Math.round(diff)} hours`;
             if (diff >= 20){
                 const newRentPrice = rentPrice/2;
-                await request('api/bike/available/add', 'POST', { name, type, rentPrice: newRentPrice });
+                await request('api/bike/available/add', 'POST', { name, type, rentPrice: newRentPrice, rentTime: timeOfRent });
             } else {
-                await request('api/bike/available/add', 'POST', { name, type, rentPrice });
+                await request('api/bike/available/add', 'POST', { name, type, rentPrice, rentTime: timeOfRent });
             }
+            console.log(timeOfRent);
             getAvailableBikesList();
             getRentedBikesList();
         } catch (e){

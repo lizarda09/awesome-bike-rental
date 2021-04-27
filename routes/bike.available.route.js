@@ -4,8 +4,8 @@ const Bike_available_list = require('../models/BikeAvailable');
 
 router.post('/add', async function (req, res){
     try {
-        const { name, type, rentPrice } = req.body;
-        const bike = new Bike_available_list({ name, type, rentPrice });
+        const { name, type, rentPrice, rentTime } = req.body;
+        const bike = new Bike_available_list({ name, type, rentPrice, rentTime });
         await bike.save();
         res.status(200).json({message: 'Bike has been added'});
     } catch (e) {

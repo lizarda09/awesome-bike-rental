@@ -19,11 +19,12 @@ export const AvailableBikes = ({ availableBikesList, getAvailableBikesList, getR
         try {
             const idAvailableBike = event.target.dataset.id;
             const bikeInfo = await request(`api/bike/available/${idAvailableBike}`);
-            const { id, name, type, rentPrice } = bikeInfo.bike;
-            const deletedBike = await request(`/api/bike/available/${idAvailableBike}`, 'DELETE', null);
-            const rentedBike = await request('api/bike/rented/add', 'POST', { name, type, rentPrice });
+            const { id, name, type, rentPrice, rentTime } = bikeInfo.bike;
+            await request(`/api/bike/available/${idAvailableBike}`, 'DELETE', null);
+            await request('api/bike/rented/add', 'POST', { name, type, rentPrice, rentTime });
             getAvailableBikesList();
             getRentedBikesList();
+            console.log(rentTime)
         } catch (e){
             console.log(e);
         }

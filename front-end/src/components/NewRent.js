@@ -10,7 +10,7 @@ export const NewRent = ({ getAvailableBikesList }) => {
     );
 
     const [form, setForm] = useState({
-        name: '', type: '', rentPrice: ''
+        name: '', type: '', rentPrice: '', rentTime: '0 hours'
     });
 
     const changeHandler = event => {
